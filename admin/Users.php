@@ -1,9 +1,31 @@
+<?php
+require '../php/functions.php';
+$users = query("SELECT * FROM users");
+if(isset($_POST["submit"])){
+
+	if(InsertUsers($_POST)>0){
+		echo "
+		<script>
+		alert('Daftar Berhasil!')
+		document.location.href = 'login.php'
+		</script>";
+	} else {
+		echo "
+		<script>
+		alert('Daftar Gagal!!!')
+		document.location.href = 'login.php'
+		</script>";
+	}
+
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<link rel="shortcut icon" type="png" href="../asset/images/icon/clever.png">
 	<title>Courses on E-Clever</title>
-	<link rel="stylesheet" type="text/css" href="subjects.css">
+	<link rel="stylesheet" href="../admin/adminstyle.css">
 	<script type="text/javascript" src="../js/script.js"></script>
 </head>
 <body>
@@ -16,26 +38,44 @@
         <div class="switch-tab" id="switch-tab" onclick="switchTAB()"><img src="../asset/images/icon/menu.svg"></div>
         <ul id="list-switch">
             <li><a href="home.html"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
-            <li><a href="mycourse.html"><img src="../asset/images/icon/archive.svg" class="icon">Kursus Saya</a></li>
+            <li><a href="mycourse.html"><img src="../asset/images/icon/archive.svg" class="icon">Kursus</a></li>
+			<li><a href="users.php"><img src="../asset/images/icon/user.svg" class="icon">Daftar Pengguna</a></li>
             <li><a href="profile.html"><img src="../asset/images/icon/user.svg" class="icon">Profile</a></li>
             <li><a onclick="logout()"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
         </ul>
     </div>
 </header>
 	
-<section class="pro">
-	<div class="diffSection" id="course_section">
-		<div class="totalcard">
-			<div class="card">
-				<center><img src="../asset/images/profile/pic.jpg"></center>
-				<center><div class="card-title">Surya pandrana</div>
-				<div id="detail">
-					<div class="duty"></div>
-					<a href=""><button class="btn-course"></button></a>
-				</div>
-				</center>
-			</div>
-		</div>
+<section class="daf-users">
+	<div class="tab-users" id="">
+		<h1>Daftar Pengguna</h1><br>
+
+		<table border="1" cellpadding="10" cellspacing="0">
+
+			<tr>
+				<th>No.</th>
+				<th>Nama</th>
+				<th>Username</th>
+				<th>Email</th>
+				<th>Role</th>
+				<th>Aksi</th>
+			</tr>
+			<?php $i = 1; ?>
+			<?php foreach($users as $row) : ?>
+			<tr>
+				<td><?= $i; ?></td>
+				<td><?= $row["nama"]; ?></td>
+				<td><?= $row["username"]; ?></td>
+				<td><?= $row["email"]; ?></td>
+				<td><?= $row["role"]; ?></td>
+				<td>
+					<a href="update.php?id=<?= $row["id"]; ?>">ubah</a><br>
+					<a href="delete.php?id=<?= $row["id"]; ?>" onclick="return confirm('yakin?')">hapus</a>
+				</td>
+			</tr>
+			<?php $i++; ?>
+			<?php endforeach; ?>
+		</table>
 	 </div>
 </section>
 

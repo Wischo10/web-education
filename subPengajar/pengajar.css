@@ -309,35 +309,6 @@ body {
 	transition: background .2s ease-in-out, border .2s ease-in-out;
   
 }
-.up-content .up-form input {
-	width: 100%;
-	border-left: 0;
-	border-right: 0;
-	border-top: 0;
-	border-bottom: 1px solid rgba(0,0,0,0.4);
-	outline: none;
-	color: rgba(0,0,0);
-	cursor: pointer;
-}
-
-input[type=file]::file-selector-button:hover {
-	background: #757679;
-  }
-
-input[type=file]::file-selector-button {
-	margin-right: 20px;
-	border: none;
-	background: #68696e;
-	padding: 10px 20px;
-	border-radius: 10px;
-	color: #fff;
-	cursor: pointer;
-	transition: background .2s ease-in-out;
-  }
-  
-  input[type=file]::file-selector-button:hover {
-	background: #4d4e50;
-  }
   .submit-btn
   {
 	  width: 85%;

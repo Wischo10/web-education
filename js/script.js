@@ -81,37 +81,37 @@
   }
 
   //login on
-var isLoggedIn = false;
-function masuk() {
-  var username = document.getElementById('username').value;
-  var password = document.getElementById('password').value;
+// var isLoggedIn = false;
+// function masuk() {
+//   var username = document.getElementById('username').value;
+//   var password = document.getElementById('password').value;
 
-  if (username === 'ronyy' && password === 'as123') {
-    isLoggedIn = true;
-    redirectToHome();
-  } 
-  if (username === 'admin' && password === '12345') {
-    isLoggedIn = true;
-    directToadmin();
-  } else {
-    alert('Username atau password salah!');
-  }
-}
-function redirectToHome() {
-  alert('Apakah anda yakin untuk melanjutkannya ?')
-  window.open('../subPelajar/home.html','_blank');
-}
+//   if (username === 'ronyy' && password === 'as123') {
+//     isLoggedIn = true;
+//     redirectToHome();
+//   } 
+//   if (username === 'admin' && password === '12345') {
+//     isLoggedIn = true;
+//     directToadmin();
+//   } else {
+//     alert('Username atau password salah!');
+//   }
+// }
+// function redirectToHome() {
+//   alert('Apakah anda yakin untuk melanjutkannya ?')
+//   window.open('../subPelajar/home.html','_blank');
+// }
 
-function directToadmin() {
-  alert('Apakah anda yakin untuk melanjutkannya ?')
-  window.open('../subPengajar/home_teacher.html','_blank');
-}
+// function directToadmin() {
+//   alert('Apakah anda yakin untuk melanjutkannya ?')
+//   window.open('../subPengajar/home_teacher.html','_blank');
+// }
 
-function logout() {
-  isLoggedIn = false;
-  redirectToLogin();
-}
+// function logout() {
+//   isLoggedIn = false;
+//   redirectToLogin();
+// }
 
-function redirectToLogin() {
-  window.location.href = '../login.html';
-}
+// function redirectToLogin() {
+//   window.location.href = '../login.html';
+// }

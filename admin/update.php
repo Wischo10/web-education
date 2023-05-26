@@ -1,3 +1,31 @@
+<?php 
+require '../php/functions.php';
+
+$id = $_GET["id"];
+
+$users = query("SELECT * FROM users WHERE id = $id")[0];
+
+
+
+if(isset($_POST["submit"])){
+
+	if(update($_POST)>0){
+		echo "
+		<script>
+		alert('Daftar Berhasil!')
+		document.location.href = 'login.php'
+		</script>";
+	} else {
+		echo "
+		<script>
+		alert('Daftar Gagal!!!')
+		document.location.href = 'login.php'
+		</script>";
+	}
+
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,8 +59,13 @@
 				<center><img src="../asset/images/profile/pic.jpg"></center>
 				<center><div class="card-title">Surya pandrana</div>
 				<div id="detail">
-					<div class="duty"></div>
-					<a href=""><button class="btn-course"></button></a>
+                <form id="register" class="input-group">
+                <input type="hidden" name="id" value="<?= $users["id"] ?>">
+				<input type="text" class="input-field" placeholder="Nama Lengkap" name="name" value="<?= $users["name"] ?>">
+                <input type="text" class="input-field" placeholder="Username" name="username" value="<?= $users["username"] ?>">
+				<input type="email" class="input-field" placeholder="Alamat Email" name="email" value="<?= $users["email"] ?>">
+				<button type="submit" id="btnSubmit" class="submit-btn reg-btn" name="register">Daftar</button>
+			    </form>
 				</div>
 				</center>
 			</div>

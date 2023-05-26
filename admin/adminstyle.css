@@ -486,6 +486,19 @@ body {
 	height: 50%;
 }
 
+/* users */
+.daf-users {
+	padding: 100px;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+}
+.daf-users .tab-users {
+	width: 50%;
+	height: 50%;
+}
 
 /*Sample Papers*/
 

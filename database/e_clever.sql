@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Bulan Mei 2023 pada 07.36
--- Versi server: 10.4.25-MariaDB
--- Versi PHP: 8.1.10
+-- Waktu pembuatan: 24 Bulan Mei 2023 pada 13.57
+-- Versi server: 10.4.28-MariaDB
+-- Versi PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,109 +24,85 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `admin`
+-- Struktur dari tabel `course`
 --
 
-CREATE TABLE `admin` (
-  `id_admin` int(11) NOT NULL,
-  `email_admin` varchar(100) NOT NULL,
-  `password_admin` varchar(100) NOT NULL,
-  `nama_admin` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `course` (
+  `id` int(11) NOT NULL,
+  `judul_course` varchar(255) NOT NULL,
+  `deskripsi` varchar(255) NOT NULL,
+  `gambar` blob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kursus`
+-- Struktur dari tabel `dokumen`
 --
 
-CREATE TABLE `kursus` (
-  `id_kursus` int(11) NOT NULL,
-  `nama_kursus` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `dokumen` (
+  `id` int(11) NOT NULL,
+  `judul` varchar(255) NOT NULL,
+  `link` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `membuat`
+-- Struktur dari tabel `users`
 --
 
-CREATE TABLE `membuat` (
-  `id_pengajar` int(11) NOT NULL,
-  `id_kursus` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `mengelola`
---
-
-CREATE TABLE `mengelola` (
-  `id_admin` int(11) NOT NULL,
-  `id_pelajar` int(11) NOT NULL,
-  `id_pengajar` int(11) NOT NULL,
-  `id_kursus` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `mengikuti`
---
-
-CREATE TABLE `mengikuti` (
-  `id_pelajar` int(11) NOT NULL,
-  `id_kursus` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `pelajar`
---
-
-CREATE TABLE `pelajar` (
-  `id_pelajar` int(11) NOT NULL,
-  `email_pelajar` varchar(100) NOT NULL,
-  `password_pelajar` varchar(100) NOT NULL,
-  `nama_pelajar` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `pengajar`
---
-
-CREATE TABLE `pengajar` (
-  `id_pengajar` int(11) NOT NULL,
-  `email_pengajar` varchar(100) NOT NULL,
-  `password_pengajar` varchar(100) NOT NULL,
-  `nama_pengajar` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(25) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `admin`
+-- Indeks untuk tabel `course`
 --
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`id_admin`);
+ALTER TABLE `course`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pelajar`
+-- Indeks untuk tabel `dokumen`
 --
-ALTER TABLE `pelajar`
-  ADD PRIMARY KEY (`id_pelajar`);
+ALTER TABLE `dokumen`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pengajar`
+-- Indeks untuk tabel `users`
 --
-ALTER TABLE `pengajar`
-  ADD PRIMARY KEY (`id_pengajar`);
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `course`
+--
+ALTER TABLE `course`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `dokumen`
+--
+ALTER TABLE `dokumen`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
