@@ -1,7 +1,6 @@
 <?php 
 include '../clever/php/functions.php';
 
-
 if(isset($_POST["daftar"])){
 
 	if(regis($_POST)>0){
@@ -30,8 +29,19 @@ if(isset($_POST["masuk"])){
 
 	if(mysqli_num_rows($result) === 1){
 		$row = mysqli_fetch_assoc($result);
-		if ($password === $row["password"]) {
-			header("Location: index.html");
+		$_SESSION['id_users'] = $row['id_user'];
+		$role = $row['role'];
+		if ($password === $row['password']) {
+			$_SESSION['login'] = true;
+			$_SESSION['role'] = $role;
+			if ($role == 'pengajar') {
+				header('Location: subPengajar/home_teacher.php');
+			}
+			elseif ($role == 'pelajar') {
+				header('Location: subPelajar/home.php');
+			} else {
+				header('Location: admin/home.php');
+			}
 			exit;
 		}
 	}

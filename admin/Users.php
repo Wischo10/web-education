@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../php/functions.php';
 $users = query("SELECT * FROM users");
 if(isset($_POST["submit"])){

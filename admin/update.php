@@ -31,7 +31,7 @@ if(isset($_POST["submit"])){
 <head>
 	<link rel="shortcut icon" type="png" href="../asset/images/icon/clever.png">
 	<title>Courses on E-Clever</title>
-	<link rel="stylesheet" type="text/css" href="subjects.css">
+	<link rel="stylesheet" type="text/css" href="adminstyle.css">
 	<script type="text/javascript" src="../js/script.js"></script>
 </head>
 <body>

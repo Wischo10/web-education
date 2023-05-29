@@ -6,6 +6,7 @@ $dbname = 'e_clever';
 $conn = mysqli_connect($host, $user, $pass, $dbname) or die("gagal");
 mysqli_select_db($conn, $dbname);
 
+
 function query($query){
     global $conn;
     $result = mysqli_query($conn, $query);
@@ -33,13 +34,13 @@ function InsertUsers($data) {
 
 function delete($id){
     global $conn;
-    mysqli_query($conn, "DELETE FROM users WHERE id = $id");
+    mysqli_query($conn, "DELETE FROM users WHERE id_users = $id");
     return mysqli_affected_rows($conn);
 }
 
 function update($data){
     global $conn;
-    $id = $data(["id"]);
+    $id = $data(["id_users"]);
     $name = htmlspecialchars($data["nama"]);
     $username = htmlspecialchars($data["username"]);
     $email = htmlspecialchars($data["email"]);
@@ -89,7 +90,6 @@ function regis($data){
 
 mysqli_query($conn, $query);
 return mysqli_affected_rows($conn);
-
 }
 
 ?>

@@ -1,43 +1,62 @@
+<?php
+session_start();
+include '../php/functions.php';
+$course = query("SELECT * FROM course");
+$role = $_SESSION["role"] == 'pengajar';
+$id = $_SESSION['id_users'];
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<link rel="shortcut icon" type="png" href="../asset/images/icon/clever.png">
 	<title>Courses on E-Clever</title>
-	<link rel="stylesheet" type="text/css" href="pelajarstyle.css">
+	<link rel="stylesheet" type="text/css" href="pengajar.css">
 	<script type="text/javascript" src="../js/script.js"></script>
 </head>
 <body>
 	
 <!-- NAVIGATION -->
-<header>
-    <div class="nav" id="nav">
-        <div id="learned-logo">
-        <a href="#"><img src="../asset/images/icon/clever.png" style="width: 120px;"></a></div>
-        <div class="switch-tab" id="switch-tab" onclick="switchTAB()"><img src="../asset/images/icon/menu.svg"></div>
-        <ul id="list-switch">
-            <li><a href="home.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
-            <li><a href="mycourse.html"><img src="../asset/images/icon/archive.svg" class="icon">Kursus Saya</a></li>
-            <li><a href="profile.html"><img src="../asset/images/icon/user.svg" class="icon">Profile</a></li>
-            <li><a onclick="logout()"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
-        </ul>
-    </div>
-</header>
-	
-<section class="pro">
-	<div class="diffSection" id="course_section">
+	<header>
+		<div class="nav" id="nav">
+			<div id="learned-logo">
+			<a href="#"><img src="../asset/images/icon/clever.png" style="width: 120px;"></a></div>
+			<div class="switch-tab" id="switch-tab" onclick="switchTAB()"><img src="../asset/images/icon/menu.svg"></div>
+			<ul id="list-switch">
+				<li><a href="home_teacher.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
+				<li><a href="course_teacher.html"><img src="../asset/images/icon/archive.svg" class="icon">Kursus</a></li>
+				<li><a href="profile_pengajar.html"><img src="../asset/images/icon/user.svg" class="icon">Profile</a></li>
+				<li><a onclick="logout()"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
+			</ul>
+		</div>
+	</header>
+
+<!-- Course -->
+<div class="diffSection" id="course_section">
+		<center><p style="font-size: 50px; padding-top: 100px; padding-bottom: 60px;">Kursus</p></center>
 		<div class="totalcard">
+		<?php $i = 1; ?>
+			<?php foreach($course as $row) : ?>
 			<div class="card">
-				<center><img src="../asset/images/profile/pic.jpg"></center>
-				<center><div class="card-title">Surya pandrana</div>
+				<center>
+					<?php
+					echo "<img src='data:image/jpeg;base64," . base64_encode($row['gambar']) . "' alt='profileImage' class='profile-image'>";
+					?>
+				</center>
+				<center><div class="card-title"><?= $row["judul_course"]; ?></div>
 				<div id="detail">
+					<p><?= $row["deskripsi"]; ?></p>
 					<div class="duty"></div>
-					<a href=""><button class="btn-course"></button></a>
+					<a href="login.html" target="_blank"><button class="btn-course">Join Course</button></a>
 				</div>
 				</center>
+		
 			</div>
+			<?php $i++; ?>
+			<?php endforeach; ?>
 		</div>
-	 </div>
-</section>
+	</div>
+
 
 <!-- FOOTER -->
 <footer>
