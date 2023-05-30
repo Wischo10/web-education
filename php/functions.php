@@ -17,16 +17,14 @@ function query($query){
     return $rows;
 }
 
-function InsertUsers($data) {
+function InsertCourse($data) {
     global $conn;
-    $name = htmlspecialchars($data["nama"]);
-    $username = htmlspecialchars($data["username"]);
-    $email = htmlspecialchars($data["email"]);
-    $password = htmlspecialchars($data["password"]);
-    $role = htmlspecialchars($data["role"]);
+    $judul = ($data['judul_course']);
+    $deskrip = ($data['deskripsi']);
+    $gambar = ($data['gambar']);
 
-    $query = "INSERT INTO users VALUES
-                ('','$name', '$username', '$email', '$password', '$role' ) ";
+    $query = "INSERT INTO course VALUES
+                ('','$judul', '$deskrip', '$gambar') ";
     
     mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);

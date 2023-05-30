@@ -1,29 +1,9 @@
-<?php
-session_start();
-include '../php/functions.php';
-
-if(isset($_POST['upload'])){
-
-	if(InsertCourse($_POST)>0){
-		echo "
-		<script>
-		alert('Berhasil!')
-		</script>";
-	} else {
-		echo "
-		<script>
-		alert('Gagal!!!')
-		</script>";
-	}
-}
-
-?>
 <!DOCTYPE html>
 <html>
 <head>
 	<link rel="shortcut icon" type="png" href="../asset/images/icon/clever.png">
 	<title>Courses on E-Clever</title>
-	<link rel="stylesheet" type="text/css" href="../subPengajar/pengajar.css">
+	<link rel="stylesheet" type="text/css" href="adminstyle.css">
 	<script type="text/javascript" src="../js/script.js"></script>
 </head>
 <body>
@@ -35,10 +15,11 @@ if(isset($_POST['upload'])){
         <a href="#"><img src="../asset/images/icon/clever.png" style="width: 120px;"></a></div>
         <div class="switch-tab" id="switch-tab" onclick="switchTAB()"><img src="../asset/images/icon/menu.svg"></div>
         <ul id="list-switch">
-		<li><a href="home_teacher.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
-		<li><a href="course_teacher.php"><img src="../asset/images/icon/archive.svg" class="icon">Kursus</a></li>
-		<li><a href="profile_pengajar.php"><img src="../asset/images/icon/user.svg" class="icon">Profile</a></li>
-		<li><a onclick="logout()"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
+            <li><a href="home.html"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
+            <li><a href="mycourse.html"><img src="../asset/images/icon/archive.svg" class="icon">Kursus</a></li>
+			<li><a href="users.php"><img src="../asset/images/icon/user.svg" class="icon">Daftar Pengguna</a></li>
+            <li><a href="profile.html"><img src="../asset/images/icon/user.svg" class="icon">Profile</a></li>
+            <li><a onclick="logout()"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
         </ul>
     </div>
 </header>
@@ -47,31 +28,11 @@ if(isset($_POST['upload'])){
 	<div class="diffSection" id="course_section">
 		<div class="totalcard">
 			<div class="card">
+				<center><img src="../asset/images/profile/pic.jpg"></center>
+				<center><div class="card-title">Surya pandrana</div>
 				<div id="detail">
-                <form id="upload" class="input-group" method="post">
-				<input type="text" class="input-field" placeholder="Judul kursus" name="judul_course" id="judul_course">
-                <input type="text" class="input-field" placeholder="Deskripsi" name="deskripsi" id="deskripsi">
-				<input type="file" class="input-field" placeholder="Gambar" name="gambar" id="gambar">
-				<button type="submit" id="btnSubmit" class="submit-btn reg-btn" name="upload">Upload</button>
-			    </form>
-				</div>
-				</center>
-			</div>
-		</div>
-	 </div>
-</section>
-
-<section class="pro">
-	<div class="diffSection" id="course_section">
-		<div class="totalcard">
-			<div class="card">
-				<div id="detail">
-                <form id="upload" class="input-group" method="post">
-				<input type="text" class="input-field" placeholder="Judul kursus" name="judul_course" id="judul_course">
-                <input type="text" class="input-field" placeholder="Deskripsi" name="deskripsi" id="deskripsi">
-				<input type="file" class="input-field" placeholder="Gambar" name="gambar" id="gambar">
-				<button type="submit" id="btnSubmit" class="submit-btn reg-btn" name="upload">Upload</button>
-			    </form>
+					<div class="duty"></div>
+					<a href=""><button class="btn-course"></button></a>
 				</div>
 				</center>
 			</div>

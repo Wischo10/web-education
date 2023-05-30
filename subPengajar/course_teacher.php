@@ -1,22 +1,10 @@
 <?php
 session_start();
 include '../php/functions.php';
-
-if(isset($_POST['upload'])){
-
-	if(InsertCourse($_POST)>0){
-		echo "
-		<script>
-		alert('Berhasil!')
-		</script>";
-	} else {
-		echo "
-		<script>
-		alert('Gagal!!!')
-		</script>";
-	}
-}
-
+$course = query("SELECT * FROM course");
+$doc = query("SELECT * FROM dokumen");
+$role = $_SESSION["role"] == 'pengajar';
+$id = $_SESSION['id_users'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,7 +12,7 @@ if(isset($_POST['upload'])){
 	<link rel="shortcut icon" type="png" href="../asset/images/icon/clever.png">
 	<title>Courses on E-Clever</title>
 	<link rel="stylesheet" type="text/css" href="../subPengajar/pengajar.css">
-	<script type="text/javascript" src="../js/script.js"></script>
+
 </head>
 <body>
 	
@@ -42,42 +30,26 @@ if(isset($_POST['upload'])){
         </ul>
     </div>
 </header>
-	
-<section class="pro">
-	<div class="diffSection" id="course_section">
-		<div class="totalcard">
-			<div class="card">
-				<div id="detail">
-                <form id="upload" class="input-group" method="post">
-				<input type="text" class="input-field" placeholder="Judul kursus" name="judul_course" id="judul_course">
-                <input type="text" class="input-field" placeholder="Deskripsi" name="deskripsi" id="deskripsi">
-				<input type="file" class="input-field" placeholder="Gambar" name="gambar" id="gambar">
-				<button type="submit" id="btnSubmit" class="submit-btn reg-btn" name="upload">Upload</button>
-			    </form>
-				</div>
-				</center>
-			</div>
-		</div>
-	 </div>
-</section>
 
-<section class="pro">
-	<div class="diffSection" id="course_section">
-		<div class="totalcard">
-			<div class="card">
-				<div id="detail">
-                <form id="upload" class="input-group" method="post">
-				<input type="text" class="input-field" placeholder="Judul kursus" name="judul_course" id="judul_course">
-                <input type="text" class="input-field" placeholder="Deskripsi" name="deskripsi" id="deskripsi">
-				<input type="file" class="input-field" placeholder="Gambar" name="gambar" id="gambar">
-				<button type="submit" id="btnSubmit" class="submit-btn reg-btn" name="upload">Upload</button>
-			    </form>
+<!-- Videos on HTML -->
+<?php $i = 1; ?>
+<?php foreach($doc as $row) : ?>
+<div class="title2" id="">
+		<span><?= $row['judul']; ?></span>
+	</div>
+	<center>
+		<div class="ccardbox2">
+			<div class="dcard2">
+				<div class="fpart2"><img src="<?=  $row['gambar']; ?>">
+					<iframe src="<?=  $row['link']; ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 				</div>
-				</center>
 			</div>
 		</div>
-	 </div>
-</section>
+	</center>
+<br><br>
+<?php $i++; ?>
+<?php endforeach; ?>
+
 
 <!-- FOOTER -->
 <footer>
@@ -107,6 +79,14 @@ if(isset($_POST['upload'])){
 		</div>
 	</div>
 </footer>
-
+<script type="text/javascript" src="../js/script.js"></script>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var videoId = "<?php echo $doc['link']; ?>";
+            var materiId = "<?php echo $doc['id_doc']; ?>";
+            var playerId = "player-" + materiId;
+            playVideo(playerId, videoId);
+        });
+    </script>
 </body>
 </html>
