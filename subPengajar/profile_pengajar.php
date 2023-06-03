@@ -1,7 +1,13 @@
 <?php
 session_start();
+if( !isset($_SESSION["login"]) ) {
+	header("Location: login.php");
+	exit;
+}
 include '../php/functions.php';
-$users = query('SELECT * FROM users');
+$role = $_SESSION["role"] == 'pengajar';
+$id = $_SESSION['id_users'];
+$users = query('SELECT * FROM users WHERE id_users');
 
 ?>
 <!DOCTYPE html>
@@ -23,8 +29,9 @@ $users = query('SELECT * FROM users');
         <ul id="list-switch">
 		<li><a href="home_teacher.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
 		<li><a href="course_teacher.php"><img src="../asset/images/icon/archive.svg" class="icon">Kursus</a></li>
+		<li><a href="upload.php"><img src="../asset/images/icon/upload.svg" class="icon">Upload</a></li>
 		<li><a href="profile_pengajar.php"><img src="../asset/images/icon/user.svg" class="icon">Profile</a></li>
-		<li><a onclick="logout()"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
+		<li><a href="../php/logout.php"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
         </ul>
     </div>
 </header>
@@ -37,10 +44,12 @@ $users = query('SELECT * FROM users');
 				<center><div class="card-title">Surya pandrana</div>
 				<div id="detail">
 					<div>
-						<p><?= $users['nama']; ?></p>
-						<p><?= $users["username"]; ?></p>
-						<p><?= $users["email"]; ?></p>
-						<p><?= $users["role"]; ?></p>
+						<?php
+						echo $users['name'];
+						echo $users['username'];
+						echo $users['email'];
+						echo $users['role'];
+						?>
 					</div>
 				</div>
 				</center>

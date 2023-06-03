@@ -1,5 +1,9 @@
 <?php
 session_start();
+if( !isset($_SESSION["login"]) ) {
+	header("Location: login.php");
+	exit;
+}
 include '../php/functions.php';
 
 if(isset($_POST['upload'])){
@@ -37,8 +41,9 @@ if(isset($_POST['upload'])){
         <ul id="list-switch">
 		<li><a href="home_teacher.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
 		<li><a href="course_teacher.php"><img src="../asset/images/icon/archive.svg" class="icon">Kursus</a></li>
+		<li><a href="upload.php"><img src="../asset/images/icon/upload.svg" class="icon">Upload</a></li>
 		<li><a href="profile_pengajar.php"><img src="../asset/images/icon/user.svg" class="icon">Profile</a></li>
-		<li><a onclick="logout()"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
+		<li><a href="../php/logout.php"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
         </ul>
     </div>
 </header>
@@ -48,33 +53,15 @@ if(isset($_POST['upload'])){
 		<div class="totalcard">
 			<div class="card">
 				<div id="detail">
-                <form id="upload" class="input-group" method="post">
+                <form id="upload" class="input-group" method="post" enctype="multipart/form-data">
 				<input type="text" class="input-field" placeholder="Judul kursus" name="judul_course" id="judul_course">
                 <input type="text" class="input-field" placeholder="Deskripsi" name="deskripsi" id="deskripsi">
 				<input type="file" class="input-field" placeholder="Gambar" name="gambar" id="gambar">
 				<button type="submit" id="btnSubmit" class="submit-btn reg-btn" name="upload">Upload</button>
 			    </form>
 				</div>
-				</center>
 			</div>
-		</div>
-	 </div>
-</section>
-
-<section class="pro">
-	<div class="diffSection" id="course_section">
-		<div class="totalcard">
-			<div class="card">
-				<div id="detail">
-                <form id="upload" class="input-group" method="post">
-				<input type="text" class="input-field" placeholder="Judul kursus" name="judul_course" id="judul_course">
-                <input type="text" class="input-field" placeholder="Deskripsi" name="deskripsi" id="deskripsi">
-				<input type="file" class="input-field" placeholder="Gambar" name="gambar" id="gambar">
-				<button type="submit" id="btnSubmit" class="submit-btn reg-btn" name="upload">Upload</button>
-			    </form>
-				</div>
-				</center>
-			</div>
+			<br>
 		</div>
 	 </div>
 </section>

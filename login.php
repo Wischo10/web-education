@@ -1,4 +1,10 @@
-<?php 
+<?php
+session_start();
+if( isset($_SESSION["login"]) ) {
+	header("Location: login.php");
+	exit;
+}
+
 include '../clever/php/functions.php';
 
 if(isset($_POST["daftar"])){
@@ -62,7 +68,7 @@ if(isset($_POST["masuk"])){
 </head>
 <body>
 		<div class="form-box">
-			<div class="close" onclick="window.location.href='index.html'"><img src="../asset/images/icon/x-square.svg" alt=""></div>
+			<div class="close" onclick="window.location.href='index.html'"><img src="asset/images/icon/x-square.svg" alt=""></div>
 			<div class="button-box">
 				<div id="btn"></div>
 				<button type="button" class="toggle-btn" id="log" onclick="login()">Masuk</button>

@@ -18,7 +18,7 @@
             <li><a href="home.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
             <li><a href="mycourse.html"><img src="../asset/images/icon/archive.svg" class="icon">Kursus Saya</a></li>
             <li><a href="profile.html"><img src="../asset/images/icon/user.svg" class="icon">Profile</a></li>
-            <li><a onclick="logout()"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
+            <li><a href="logout.php"><img src="../asset/images/icon/power.svg" class="icon">Keluar</a></li>
         </ul>
     </div>
 </header>

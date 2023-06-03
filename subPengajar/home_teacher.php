@@ -1,9 +1,12 @@
 <?php
 session_start();
+if( !isset($_SESSION["login"]) ) {
+	header("Location: login.php");
+	exit;
+}
 include '../php/functions.php';
 $course = query("SELECT * FROM course");
-$role = $_SESSION["role"] == 'pengajar';
-$id = $_SESSION['id_users'];
+
 ?>
 
 <!DOCTYPE html>
@@ -23,10 +26,11 @@ $id = $_SESSION['id_users'];
 			<a href="#"><img src="../asset/images/icon/clever.png" style="width: 120px;"></a></div>
 			<div class="switch-tab" id="switch-tab" onclick="switchTAB()"><img src="../asset/images/icon/menu.svg"></div>
 			<ul id="list-switch">
-				<li><a href="home_teacher.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
-				<li><a href="course_teacher.php"><img src="../asset/images/icon/archive.svg" class="icon">Kursus</a></li>
-				<li><a href="profile_pengajar.php"><img src="../asset/images/icon/user.svg" class="icon">Profile</a></li>
-				<li><a onclick="logout()"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
+			<li><a href="home_teacher.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
+			<li><a href="course_teacher.php"><img src="../asset/images/icon/archive.svg" class="icon">Kursus</a></li>
+			<li><a href="upload.php"><img src="../asset/images/icon/upload.svg" class="icon">Upload</a></li>
+			<li><a href="profile_pengajar.php"><img src="../asset/images/icon/user.svg" class="icon">Profile</a></li>
+			<li><a href="../php/logout.php"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
 			</ul>
 		</div>
 	</header>

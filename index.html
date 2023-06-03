@@ -28,7 +28,6 @@
 			<div class="logo"><img src="asset/images/icon/clever.png" alt="logo"></div>
 			<ul>
 				<li><a class="active" href="">Beranda</a></li>
-				<li><a href="#about_section">Tentang</a></li>
 				<li><a href="#course_section">Kursus</a></li>
 				<li><a href="#contactus_section">Kontak</a></li>
 			</ul>
@@ -49,26 +48,12 @@
 			<div class="close" onclick="sideMenu(1)"><img src="asset/images/icon/close.png" alt=""></div>
 			<ul>
 				<li><a class="active" href="">Beranda</a></li>
-				<li><a href="#about_section">Tentang</a></li>
 				<li><a href="#course_section">Kursus</a></li>
 				<li><a href="#contactus_section">Kontak</a></li>
 				<li><a href="login.php">Mulai Sekarang</a></li>
 			</ul>
 		</div>
 	</header>
-<!-- ABOUT -->
-	<div class="diffSection" id="about_section">
-		<center><p style="font-size: 50px; padding: 110px">Tentang</p></center>
-		<div class="about-content">
-				<div class="side-image">
-					<img class="sideImage" src="asset/images/extra/edu.jpg" height="500px">
-				</div>
-				<div class="side-text">
-					<h2>Apa yang kamu ketahui tentang pendidikan ?</h2>
-					<p>Pendidikan adalah proses memfasilitasi pembelajaran, atau perolehan pengetahuan, keterampilan, nilai, kepercayaan, dan kebiasaan. Metode pendidikan mencakup pengajaran, pelatihan, bercerita, diskusi, dan penelitian terarah.<br> Situs web pendidikan dapat mencakup situs web yang memiliki game, video, atau sumber daya terkait topik yang bertindak sebagai alat untuk meningkatkan pembelajaran dan melengkapi pengajaran di kelas. Situs web ini membantu membuat proses belajar menghibur dan menarik bagi siswa, terutama di zaman sekarang. <br>Dengan menggunakan HTML(HyperText Markup Language), CSS(Cascading Style Sheet), JavaScript, kita dapat belajar lebih mudah dan dengan cara yang menarik.</p>
-				</div>
-		</div>
-	</div>
 
 
 <!-- Course -->
@@ -79,7 +64,7 @@
 				<center><img src="asset/images/course/thumb-1.png"></center>
 				<center><div class="card-title">Hypertext Markup Language (HTML)</div>
 				<div id="detail">
-					<p>“ HTML adalah kerangka struktural dari proses desain situs web. Dan proses desain website HTML menggunakan tag HTML yang sering digunakan dalam desain website antara lain div, p, h1, img, a, nav, ol, ul dan masih banyak lagi.“</p>
+					<p>“ Hypertext Markup Language yaitu kerangka struktural dari proses desain situs web. Dalam proses desain website Hypertext Markup Language menggunakan tag HTML yang sering digunakan dalam desain website antara lain div, p, h1, img, a, nav, ol, ul dan masih banyak lagi.“</p>
 					<div class="duty"></div>
 					<a href="login.html" target="_blank"><button class="btn-course">Join Course</button></a>
 				</div>
@@ -119,12 +104,15 @@
 				<center>
 				<input type="text" name="" style="margin-right: 10px; width: 175px" required="required"><input type="text" name="lname" style="width: 175px" required="required"><br>
 				</center>
+				<br>
 				<label>Email <span class="imp">*</span></label><br>
 				<input type="email" name="Email" style="width: 100%" required="required"><br>
+				<br>
+				<br>
 				<label>Pesan <span class="imp">*</span></label><br>
-				<input type="text" name="Pesan" style="width: 100%" required="required"><br>
-				<label>Detail Kondisional</label><br>
-				<textarea name="addtional"></textarea><br>
+				<textarea name="addtional" required="required"></textarea><br>
+				<br>
+				<br>
 				<button type="submit" id="csubmit">Kirim Pesan</button>
 			</form>
 			</div>

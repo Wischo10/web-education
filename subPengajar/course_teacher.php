@@ -1,10 +1,48 @@
 <?php
 session_start();
-include '../php/functions.php';
-$course = query("SELECT * FROM course");
-$doc = query("SELECT * FROM dokumen");
 $role = $_SESSION["role"] == 'pengajar';
 $id = $_SESSION['id_users'];
+if( !isset($_SESSION["login"]) ) {
+	header("Location: login.php");
+	exit;
+}
+include '../php/functions.php';
+$course = query("SELECT * FROM course WHERE id_course");
+$doc = query("SELECT * FROM dokumen WHERE id_doc");
+
+if(isset($_POST['upload_link'])){
+
+	
+	if(InsertDoc($_POST)>0){
+		echo "
+		<script>
+		alert('Upload Video Berhasil!')
+		</script>";
+		header("Refresh:0");
+	} else {
+		echo "
+		<script>
+		alert('Upload Video Gagal!!!')
+		</script>";
+	}
+}
+if(isset($_POST['delete_link'])){
+
+	
+	if(deleteDoc($_POST)>0){
+		echo "
+		<script>
+		alert('Upload Video Berhasil!')
+		</script>";
+		header("Refresh:0");
+	} else {
+		echo "
+		<script>
+		alert('Upload Video Gagal!!!')
+		</script>";
+	}
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,30 +63,59 @@ $id = $_SESSION['id_users'];
         <ul id="list-switch">
 		<li><a href="home_teacher.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
 		<li><a href="course_teacher.php"><img src="../asset/images/icon/archive.svg" class="icon">Kursus</a></li>
+		<li><a href="upload.php"><img src="../asset/images/icon/upload.svg" class="icon">Upload</a></li>
 		<li><a href="profile_pengajar.php"><img src="../asset/images/icon/user.svg" class="icon">Profile</a></li>
-		<li><a onclick="logout()"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
+		<li><a href="../php/logout.php"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
         </ul>
     </div>
 </header>
 
 <!-- Videos on HTML -->
+<section class="pro">
+		
 <?php $i = 1; ?>
-<?php foreach($doc as $row) : ?>
-<div class="title2" id="">
-		<span><?= $row['judul']; ?></span>
-	</div>
-	<center>
-		<div class="ccardbox2">
-			<div class="dcard2">
-				<div class="fpart2"><img src="<?=  $row['gambar']; ?>">
-					<iframe src="<?=  $row['link']; ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<?php foreach($course as $row) :?>
+		<div class="title2" id="">
+			<span class="tag2"><?= $row['judul_course'];?></span>
+			<div class="diffSection" id="course_section">
+				<div class="totalcard">
+					<div class="card">
+						<div id="detail">
+						<form id="upload_link" class="input-group" method="post">
+							<input type="hidden" class="input-field" value="<?= $row['id_course'];?>" name="id_course" id="id_course" >
+							<input type="link" class="input-field" placeholder="Link" name="link" id="link">
+							<button type="submit" id="btnSubmit" class="submit-btn" name="upload_link">Add YouTube Video Link to Course </button>
+						</form>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</center>
-<br><br>
-<?php $i++; ?>
-<?php endforeach; ?>
+		<?php foreach($doc as $col) :?>
+			<?php if  ($row['id_course']==$col['id_course']){?>
+			<br>
+			<center>
+				<div class="ccardbox2">
+					<div class="fpart2">
+						<h2><?=  $col['judul_doc']; ?></h2>
+						<iframe src="<?=  $col['link']; ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						<form id="delete_video" class="input-group" method="post">
+						<input type="hidden" class="input-field" value="<?= $col['id_doc'];?>" name="id_doc" id="id_doc" >
+						<br>
+						<button type="submit" id="btnSubmit" class="submit-btn" name="delete_link">Delete Video </button>
+						<br>
+					</form>
+					</div>
+				</div>
+			</center>
+			<?php } ?>
+			<?php endforeach; ?>
+			<?php endforeach; ?>
+			<br><br>
+
+		<?php $i++; ?>
+
+</section>
 
 
 <!-- FOOTER -->
