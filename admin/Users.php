@@ -44,9 +44,10 @@ if(isset($_POST["submit"])){
         <a href="#"><img src="../asset/images/icon/clever.png" style="width: 120px;"></a></div>
         <div class="switch-tab" id="switch-tab" onclick="switchTAB()"><img src="../asset/images/icon/menu.svg"></div>
         <ul id="list-switch">
-			<li><a href="home_admin.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
+		<li><a href="home_admin.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
             <li><a href="course_admin.php"><img src="../asset/images/icon/archive.svg" class="icon">Kursus</a></li>
 			<li><a href="users.php"><img src="../asset/images/icon/user.svg" class="icon">Daftar Pengguna</a></li>
+            <li><a href="list_course.php"><img src="../asset/images/icon/book.svg" class="icon">Daftar Kursus</a></li>
             <li><a href="profile_admin.php"><img src="../asset/images/icon/user.svg" class="icon">Data Diri</a></li>
             <li><a href="../php/logout.php"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
         </ul>
@@ -78,36 +79,6 @@ if(isset($_POST["submit"])){
 				<td>
 					<a href="update.php?id=<?= $row["id_users"]; ?>">ubah</a><br>
 					<a href="delete.php?id=<?= $row["id_users"]; ?>" onclick="return confirm('yakin?')">hapus</a>
-				</td>
-			</tr>
-			<?php $i++; ?>
-			<?php endforeach; ?>
-		</table>
-	 </div>
-</section>
-
-<section class="daf-users">
-	<div class="tab-users" id="">
-		<h1>Daftar Kursus</h1><br>
-
-		<table border="1" cellpadding="10" cellspacing="0">
-
-			<tr>
-				<th>No.</th>
-				<th>Gambar</th>
-				<th>Judul</th>
-				<th>Deskripsi</th>
-				<th>Aksi</th>
-			</tr>
-			<?php $i = 1; ?>
-			<?php foreach($course as $row) : ?>
-			<tr>
-				<td><?= $i; ?></td>
-				<td><img src="temp/<?= $row["gambar"]; ?>"></td>
-				<td><?= $row["judul_course"]; ?></td>
-				<td><?= $row["deskripsi"]; ?></td>
-				<td>
-					<a href="delete.php?id=<?= $row["id_course"]; ?>" onclick="return confirm('yakin?')">hapus</a>
 				</td>
 			</tr>
 			<?php $i++; ?>

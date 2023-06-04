@@ -42,16 +42,22 @@ $id = $_SESSION['id_users'];
 		<div class="totalcard">
 			<div class="card">
 				<center><img src="../asset/images/profile/pic.jpg"></center>
-				<center><div class="card-title"><?php echo $users['nama']; ?></div>
+				<center><div class="card-title"></div>
 				<div id="detail">
 					<div>
 						<?php
-						if( isset($_SESSION["login"]) ) {
-							$users = query('SELECT * FROM users WHERE id_users');
-							
-							echo $users['username'];
-							echo $users['email'];
-							echo $users['role'];
+						if( isset($_SESSION["login"]) && isset($_SESSION["id_users"]) ) {
+
+						
+						$query = "SELECT * FROM users WHERE id_users = '".$_SESSION['id_users']."'";
+						$result = mysqli_query($conn, $query);
+
+						  $row = mysqli_fetch_assoc($result);
+				
+						  echo "<div class='info'><strong>:</strong><p> " . $row['nama'] . " </p></div>";
+						  echo "<div class='info'><strong>Student Name:</strong> <span>" . $row['username'] . "</span></div>";
+						  echo "<div class='info'><strong>Course:</strong> <span>" . $row['email'] . "</span></div>";
+						  echo "<div class='info'><strong>Year Level:</strong> <span>" . $row['role'] . "</span></div>";
 						}
 
 						?>

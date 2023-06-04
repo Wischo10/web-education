@@ -36,14 +36,19 @@ $course = query("SELECT * FROM course");
 	</header>
 
 <!-- Course -->
+<div class="title">
+		<span>Kursus<br>Di E-Clever</span>
+		<div class="shortdesc">
+			<p>Pelajari bahasa pemrograman dan konsepnya untuk mempersiapkan masa depanmu.</p>
+		</div>
+	</div>
 <div class="diffSection" id="course_section">
-		<center><p style="font-size: 50px; padding-top: 100px; padding-bottom: 60px;">Kursus</p></center>
 		<div class="totalcard">
 		<?php $i = 1; ?>
 			<?php foreach($course as $row) : ?>
 			<div class="card">
 				<center>
-				<img src="temp/<?= $row["gambar"]; ?>">
+				<img src="../temp/<?= $row["gambar"]; ?>">
 				</center>
 				<center><div class="card-title"><?= $row["judul_course"]; ?></div>
 				<div id="detail">

@@ -5,16 +5,34 @@ if( !isset($_SESSION["login"]) ) {
 	exit;
 }
 $role = $_SESSION["role"] == 'admin';
-include '../php/functions.php';
+require '../php/functions.php';
+$users = query("SELECT * FROM users");
 $course = query("SELECT * FROM course WHERE id_course");
-$doc = query("SELECT * FROM dokumen WHERE id_doc");
+if(isset($_POST["submit"])){
+
+	if(InsertUsers($_POST)>0){
+		echo "
+		<script>
+		alert('Daftar Berhasil!')
+		document.location.href = 'login.php'
+		</script>";
+	} else {
+		echo "
+		<script>
+		alert('Daftar Gagal!!!')
+		document.location.href = 'login.php'
+		</script>";
+	}
+
+}
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<link rel="shortcut icon" type="png" href="../asset/images/icon/clever.png">
 	<title>Courses on E-Clever</title>
-	<link rel="stylesheet" type="text/css" href="adminstyle.css">
+	<link rel="stylesheet" href="../admin/adminstyle.css">
 	<script type="text/javascript" src="../js/script.js"></script>
 </head>
 <body>
@@ -26,7 +44,7 @@ $doc = query("SELECT * FROM dokumen WHERE id_doc");
         <a href="#"><img src="../asset/images/icon/clever.png" style="width: 120px;"></a></div>
         <div class="switch-tab" id="switch-tab" onclick="switchTAB()"><img src="../asset/images/icon/menu.svg"></div>
         <ul id="list-switch">
-		<li><a href="home_admin.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
+			<li><a href="home_admin.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
             <li><a href="course_admin.php"><img src="../asset/images/icon/archive.svg" class="icon">Kursus</a></li>
 			<li><a href="users.php"><img src="../asset/images/icon/user.svg" class="icon">Daftar Pengguna</a></li>
             <li><a href="list_course.php"><img src="../asset/images/icon/book.svg" class="icon">Daftar Kursus</a></li>
@@ -36,32 +54,34 @@ $doc = query("SELECT * FROM dokumen WHERE id_doc");
     </div>
 </header>
 
-<!-- Courses Available -->
-<section class="pro">
-		
-<?php $i = 1; ?>
-		<?php foreach($course as $row) :?>
-		<div class="title2" id="">
-			<span class="tag2"><?= $row['judul_course'];?></span>
-		</div>
-		<?php foreach($doc as $col) :?>
-			<?php if  ($row['id_course']==$col['id_course']){?>
-			<br>
-			<center>
-				<div class="ccardbox2">
-					<div class="fpart2">
-						<h2><?=  $col['judul_doc']; ?></h2>
-						<iframe src="<?=  $col['link']; ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-					</div>
-				</div>
-			</center>
-			<?php } ?>
-			<?php endforeach; ?>
-			<?php endforeach; ?>
-			<br><br>
+<section class="daf-users">
+	<div class="tab-users" id="">
+		<h1>Daftar Kursus</h1><br>
 
-		<?php $i++; ?>
+		<table border="1" cellpadding="10" cellspacing="0">
 
+			<tr>
+				<th>No.</th>
+				<th>Gambar</th>
+				<th>Judul</th>
+				<th>Deskripsi</th>
+				<th>Aksi</th>
+			</tr>
+			<?php $i = 1; ?>
+			<?php foreach($course as $row) : ?>
+			<tr>
+				<td><?= $i; ?></td>
+				<td><img width="50px"; src="../temp/<?= $row["gambar"]; ?>"></td>
+				<td><?= $row["judul_course"]; ?></td>
+				<td><?= $row["deskripsi"]; ?></td>
+				<td>
+					<a href="delete.php?id=<?= $row["id_course"]; ?>" onclick="return confirm('yakin?')">hapus</a>
+				</td>
+			</tr>
+			<?php $i++; ?>
+			<?php endforeach; ?>
+		</table>
+	 </div>
 </section>
 
 <!-- FOOTER -->

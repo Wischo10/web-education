@@ -1,3 +1,15 @@
+<?php
+session_start();
+if( !isset($_SESSION["login"]) ) {
+	header("Location: login.php");
+	exit;
+}
+$role = $_SESSION["role"] == 'pelajar';
+include '../php/functions.php';
+$course = query("SELECT * FROM course WHERE id_course");
+$doc = query("SELECT * FROM dokumen WHERE id_doc");
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,118 +27,41 @@
         <a href="#"><img src="../asset/images/icon/clever.png" style="width: 120px;"></a></div>
         <div class="switch-tab" id="switch-tab" onclick="switchTAB()"><img src="../asset/images/icon/menu.svg"></div>
         <ul id="list-switch">
-            <li><a href="home.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
-            <li><a href="mycourse.html"><img src="../asset/images/icon/archive.svg" class="icon">Kursus Saya</a></li>
-            <li><a href="profile.html"><img src="../asset/images/icon/user.svg" class="icon">Profile</a></li>
-            <li><a href="logout.php"><img src="../asset/images/icon/power.svg" class="icon">Keluar</a></li>
+				<li><a href="home.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
+				<li><a href="mycourse.php"><img src="../asset/images/icon/archive.svg" class="icon">Kursus Saya</a></li>
+				<li><a href="profile.php"><img src="../asset/images/icon/user.svg" class="icon">Profile</a></li>
+				<li><a href="../php/logout.php"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
         </ul>
     </div>
 </header>
 
 <!-- Courses Available -->
-<div class="inbt">
-    Program Kursus Yang Diikuti :
-</div>
-<div class="ccard">
-<center>
-    <div class="ccardbox">
-        <div class="dcard">
-            <div class="fpart"><img src="../asset/images/courses/web-course.jpg"></div>
-            <a href="#html"><div class="spart">5 Materi <img src="../asset/images/icon/dropdown.png"></div></a>
-        </div>
-        <div class="dcard">
-            <div class="fpart"><img src="../asset/images/courses/css.jpg"></div>
-            <a href="#css"><div class="spart">2 Materi <img src="../asset/images/icon/dropdown.png"></div></a>
-        </div>
-        <div class="dcard">
-            <div class="fpart"><img src="../asset/images/courses/js.jpg"></div>
-            <a href="#js"><div class="spart">1 Materi <img src="../asset/images/icon/dropdown.png"></div></a>
-        </div>
-    </div>
-</center>
-</div>
-
-<!-- Videos on HTML -->
-
-	<div class="title2" id="html">
-		<span>Hypertext Markup Language (HTML)</span>
-	</div>
-	<center>
-		<div class="ccardbox2">
-			<div class="dcard2"><span class="tag" >1/3</span>
-				<div class="fpart2"><img src="../asset/images/courses/web-course.jpg">
-					<iframe src="https://youtube.com/embed/NBZ9Ro6UKV8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-				</div>
-			</div>
-			<div class="dcard2"><span class="tag" >2/3</span>
-				<div class="fpart2"><img src="../asset/images/courses/web-course.jpg">
-					<iframe src="https://youtube.com/embed/3sLSi9L5nWE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-				</div>
-			</div>
-			<div class="dcard2"><span class="tag" >3/3</span>
-				<div class="fpart2"><img src="../asset/images/courses/web-course.jpg">
-					<iframe src="https://youtube.com/embed/cUWBYzA6M-8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-				</div>
-			</div>
+<section class="pro">
+		
+<?php $i = 1; ?>
+		<?php foreach($course as $row) :?>
+		<div class="title2" id="">
+			<span class="tag2"><?= $row['judul_course'];?></span>
 		</div>
-	</center>
-
-<br><br>
-
-
-<!-- videos on css -->
-
-<div class="title2" id="css">
-	<span>Cascading Style Sheet (CSS)</span>
-</div>
-<center>
-	<div class="ccardbox2">
-		<div class="dcard2"><span class="tag" >1/3</span>
-			<div class="fpart2"><img src="../asset/images/courses/css.jpg">
-				<iframe src="https://www.youtube.com/embed/rbTEOOucUOs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-			</div>
-		</div>
-		<div class="dcard2"><span class="tag" >2/3</span>
-			<div class="fpart2"><img src="../asset/images/courses/css.jpg">
-				<iframe src="https://youtube.com/embed/8lXDi2Mxp9c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-			</div>
-		</div>
-		<div class="dcard2"><span class="tag" >3/3</span>
-			<div class="fpart2"><img src="../asset/images/courses/css.jpg">
-				<iframe src="https://youtube.com/embed/bnnislprJro" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-			</div>
-		</div>
-	</div>
-</center>
-
-<br><br>
-
-
-<!-- Videos on JAVASCRIPT Lectures -->
-
-	<div class="title2" id="js">
-		<span>Javascript (JS)</span>
-	</div>
-	<center>
-		<div class="ccardbox2">
-			<div class="dcard2"><span class="tag" >1/3</span>
-				<div class="fpart2"><img src="../asset/images/courses/js.jpg">
-					<iframe src="https://www.youtube.com/embed/uDwSnnhl1Ng" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<?php foreach($doc as $col) :?>
+			<?php if  ($row['id_course']==$col['id_course']){?>
+			<br>
+			<center>
+				<div class="ccardbox2">
+					<div class="fpart2">
+						<h2><?=  $col['judul_doc']; ?></h2>
+						<iframe src="<?=  $col['link']; ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					</div>
 				</div>
-			</div>
-			<div class="dcard2"><span class="tag" >2/3</span>
-				<div class="fpart2"><img src="../asset/images/courses/js.jpg">
-					<iframe src="https://www.youtube.com/embed/uDwSnnhl1Ng" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-				</div>
-			</div>
-			<div class="dcard2"><span class="tag" >3/3</span>
-				<div class="fpart2"><img src="../asset/images/courses/js.jpg">
-					<iframe src="https://www.youtube.com/embed/uDwSnnhl1Ng" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-				</div>
-			</div>
-		</div>
-	</center>
-<br><br>
+			</center>
+			<?php } ?>
+			<?php endforeach; ?>
+			<?php endforeach; ?>
+			<br><br>
+
+		<?php $i++; ?>
+
+</section>
 
 <!-- FOOTER -->
 <footer>

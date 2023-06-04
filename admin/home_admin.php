@@ -26,9 +26,10 @@ $course = query("SELECT * FROM course");
 			<a href="#"><img src="../asset/images/icon/clever.png" style="width: 120px;"></a></div>
 			<div class="switch-tab" id="switch-tab" onclick="switchTAB()"><img src="../asset/images/icon/menu.svg"></div>
 			<ul id="list-switch">
-            <li><a href="home_admin.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
+			<li><a href="home_admin.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
             <li><a href="course_admin.php"><img src="../asset/images/icon/archive.svg" class="icon">Kursus</a></li>
 			<li><a href="users.php"><img src="../asset/images/icon/user.svg" class="icon">Daftar Pengguna</a></li>
+            <li><a href="list_course.php"><img src="../asset/images/icon/book.svg" class="icon">Daftar Kursus</a></li>
             <li><a href="profile_admin.php"><img src="../asset/images/icon/user.svg" class="icon">Data Diri</a></li>
             <li><a href="../php/logout.php"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
 			</ul>
@@ -36,14 +37,19 @@ $course = query("SELECT * FROM course");
 	</header>
 
 <!-- MAIN Heading of Page -->
+<div class="title">
+		<span>Kursus<br>Di E-Clever</span>
+		<div class="shortdesc">
+			<p>Pelajari bahasa pemrograman dan konsepnya untuk mempersiapkan masa depanmu.</p>
+		</div>
+	</div>
 <div class="diffSection" id="course_section">
-		<center><p style="font-size: 50px; padding-top: 100px; padding-bottom: 60px;">Kursus</p></center>
 		<div class="totalcard">
 		<?php $i = 1; ?>
 			<?php foreach($course as $row) : ?>
 			<div class="card">
 				<center>
-				<img src="temp/<?= $row["gambar"]; ?>">
+				<img src="../temp/<?= $row["gambar"]; ?>">
 				</center>
 				<center><div class="card-title"><?= $row["judul_course"]; ?></div>
 				<div id="detail">

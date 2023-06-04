@@ -1,3 +1,13 @@
+<?php
+session_start();
+if( !isset($_SESSION["login"]) ) {
+	header("Location: login.php");
+	exit;
+}
+include '../php/functions.php';
+$role = $_SESSION["role"];
+$course = query("SELECT * FROM course");
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,10 +25,10 @@
         <a href="#"><img src="../asset/images/icon/clever.png" style="width: 120px;"></a></div>
         <div class="switch-tab" id="switch-tab" onclick="switchTAB()"><img src="../asset/images/icon/menu.svg"></div>
         <ul id="list-switch">
-            <li><a href="home.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
-            <li><a href="mycourse.html"><img src="../asset/images/icon/archive.svg" class="icon">Kursus Saya</a></li>
-            <li><a href="profile.html"><img src="../asset/images/icon/user.svg" class="icon">Profile</a></li>
-            <li><a onclick="logout()"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
+		<li><a href="home.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
+				<li><a href="mycourse.php"><img src="../asset/images/icon/archive.svg" class="icon">Kursus Saya</a></li>
+				<li><a href="profile.php"><img src="../asset/images/icon/user.svg" class="icon">Profile</a></li>
+				<li><a href="../php/logout.php"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
         </ul>
     </div>
 </header>
