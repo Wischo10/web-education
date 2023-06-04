@@ -51,15 +51,15 @@ if(isset($_POST['upload'])){
 </header>
 	
 <section class="pro">
-	<div class="diffSection" id="course_section">
-		<div class="totalcard">
-			<div class="card">
+	<div class="diffSec-upl" id="course_section">
+		<div class="">
+			<div class="">
 				<div id="detail">
-                <form id="upload" class="input-group" method="post" enctype="multipart/form-data">
+                <form id="upload" class="input-group-upl" method="post" enctype="multipart/form-data">
 				<input type="text" class="input-field" placeholder="Judul kursus" name="judul_course" id="judul_course">
                 <input type="text" class="input-field" placeholder="Deskripsi" name="deskripsi" id="deskripsi">
-				<input type="file" class="input-field" placeholder="Gambar" name="gambar" id="gambar">
-				<button type="submit" id="btnSubmit" class="submit-btn reg-btn" name="upload">Upload</button>
+				<input type="file" class="input-field" placeholder="Gambar" name="gambar" id="gambar"><br><br>
+				<button type="submit" id="btnSubmit" class="submit-btn-upl" name="upload">Upload</button>
 			    </form>
 				</div>
 			</div>

@@ -10,8 +10,9 @@ include '../php/functions.php';
 $course = query("SELECT * FROM course WHERE id_course");
 $doc = query("SELECT * FROM dokumen WHERE id_doc");
 
-if(isset($_POST['upload_link'])){
 
+
+if(isset($_POST['upload_link'])){
 	
 	if(InsertDoc($_POST)>0){
 		echo "
@@ -32,13 +33,13 @@ if(isset($_POST['delete_link'])){
 	if(deleteDoc($_POST)>0){
 		echo "
 		<script>
-		alert('Upload Video Berhasil!')
+		alert('Hapus Video Berhasil!')
 		</script>";
 		header("Refresh:0");
 	} else {
 		echo "
 		<script>
-		alert('Upload Video Gagal!!!')
+		alert('Hapus Video Gagal!!!')
 		</script>";
 	}
 }
@@ -77,15 +78,16 @@ if(isset($_POST['delete_link'])){
 		<?php foreach($course as $row) :?>
 		<div class="title2" id="">
 			<span class="tag2"><?= $row['judul_course'];?></span>
-			<div class="diffSection" id="course_section">
-				<div class="totalcard">
-					<div class="card">
-						<div id="detail">
-						<form id="upload_link" class="input-group" method="post">
-							<input type="hidden" class="input-field" value="<?= $row['id_course'];?>" name="id_course" id="id_course" >
-							<input type="text" class="input-field" placeholder="Judul" name="judul_course" id="judul_course">
-							<input type="link" class="input-field" placeholder="Link" name="link" id="link">
-							<button type="submit" id="btnSubmit" class="submit-btn" name="upload_link">Tambahkan Video</button>
+			<div class="diffSection-up" id="course_section">
+				<div class="">
+					<div class="">
+						<div id="">
+						<form id="upload_link" class="input-group-up" method="post">
+							<input type="hidden" class="input-field-up" value="<?= $row['id_course'];?>" name="id_course" id="id_course" >
+							<input type="text" class="input-field-up" placeholder="Judul" name="judul_doc" id="judul_doc">
+							<input type="link" class="input-field-up" placeholder="Link" name="link" id="link">
+							<br>
+							<button type="submit" id="btnSubmit" class="submit-btn-up" name="upload_link">Tambahkan Video</button>
 						</form>
 						</div>
 					</div>
@@ -96,10 +98,10 @@ if(isset($_POST['delete_link'])){
 			<?php if  ($row['id_course']==$col['id_course']){?>
 			<br>
 			<center>
-				<div class="ccardbox2">
+				<div class="ccardbox2" >
 					<div class="fpart2">
-						<h2><?=  $col['judul_doc']; ?></h2>
-						<iframe src="<?=  $col['link']; ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						<h2 style="color:black;"><?= $col['judul_doc']; ?></h2>
+						<iframe src="<?= $col['link']; ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 						<form id="delete_video" class="input-group-link" method="post">
 						<input type="hidden" class="input-field" value="<?= $col['id_doc'];?>" name="id_doc" id="id_doc" >
 						<button type="submit" id="btnSubmit" class="submit-btn-co" name="delete_link">Delete Video </button>

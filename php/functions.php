@@ -106,11 +106,12 @@ function upload() {
 function InsertDoc($data) {
     global $conn;
     $idcourse = ($data['id_course']); 
-    $judull = ($data['judul_doc']);
+    $judul = ($data['judul_doc']);
     $link = ($data['link']);
+	$convertedUrl = str_replace("watch?v=","embed/", $link);
 
     $query = "INSERT INTO dokumen VALUES
-                ('','$idcourse','$judull', '$link') ";
+                ('','$idcourse','$judul', '$convertedUrl') ";
     
     mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
