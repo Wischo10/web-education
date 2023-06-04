@@ -17,11 +17,35 @@ function query($query){
     return $rows;
 }
 
+// Utuk Users
+function InsertUsers($data) {
+    global $conn;
+    $id = ($data['id_users']); 
+    $nama = ($data['nama']);
+    $username = ($data['username']);
+    $email = ($data['email']);
+    $role = ($data['role']);
+
+    $query = "INSERT INTO dokumen VALUES
+                ('','$nama','$username', '$email','$role') ";
+    
+    mysqli_query($conn, $query);
+    return mysqli_affected_rows($conn);
+}
+
+function deleteUsers($id){
+    global $conn;
+    mysqli_query($conn, "DELETE FROM users WHERE id_users = $id");
+    return mysqli_affected_rows($conn);
+}
+
+
+// Untuk Kursus
 function InsertCourse($data) {
     global $conn;
-    $judul = ($data['judul_course']);
-    $deskrip = ($data['deskripsi']);
-    $gambar = ($data['gambar']);
+    $judul = htmlspecialchars($data['judul_course']);
+    $deskrip = htmlspecialchars($data['deskripsi']);
+
 
     $gambar = upload();
 	if( !$gambar ) {
@@ -61,7 +85,7 @@ function upload() {
 	}
 
 	// cek jika ukurannya terlalu besar
-	if( $ukuranFile > 1000000 ) {
+	if( $ukuranFile > 100000000 ) {
 		echo "<script>
 				alert('ukuran gambar terlalu besar!');
 			  </script>";
@@ -74,7 +98,7 @@ function upload() {
 	$namaFileBaru .= '.';
 	$namaFileBaru .= $ekstensiGambar;
 
-	// move_uploaded_file($tmpName, 'img/' . $namaFileBaru);
+	move_uploaded_file($tmpName, 'temp/' . $namaFileBaru);
 
 	return $namaFileBaru;
 }
@@ -100,11 +124,7 @@ function deleteDoc($id){
     return mysqli_affected_rows($conn);
 }
 
-function delete($id){
-    global $conn;
-    mysqli_query($conn, "DELETE FROM users WHERE id_users = $id");
-    return mysqli_affected_rows($conn);
-}
+
 
 function update($data){
     global $conn;
@@ -125,6 +145,8 @@ function update($data){
     return mysqli_affected_rows($conn);
 }
 
+
+// Untuk Daftar
 function regis($data){
     global $conn;
 

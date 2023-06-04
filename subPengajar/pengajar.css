@@ -309,6 +309,24 @@ body {
 	  border-radius: 30px;
   }
 
+.submit-btn-co {
+	width: 20%;
+	padding: 10px 30px;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	background: linear-gradient(to right, #0883a1, #4a11e7);
+	color: #fff;
+	border: 0;
+	outline: none;
+	border-radius: 30px;
+}
+
+.input-group-link {
+	display: flex;
+	justify-content: center;
+}
+
 .ccard {
 	display: flex;
 	flex-wrap: wrap;

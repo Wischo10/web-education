@@ -83,8 +83,9 @@ if(isset($_POST['delete_link'])){
 						<div id="detail">
 						<form id="upload_link" class="input-group" method="post">
 							<input type="hidden" class="input-field" value="<?= $row['id_course'];?>" name="id_course" id="id_course" >
+							<input type="text" class="input-field" placeholder="Judul" name="judul_course" id="judul_course">
 							<input type="link" class="input-field" placeholder="Link" name="link" id="link">
-							<button type="submit" id="btnSubmit" class="submit-btn" name="upload_link">Add YouTube Video Link to Course </button>
+							<button type="submit" id="btnSubmit" class="submit-btn" name="upload_link">Tambahkan Video</button>
 						</form>
 						</div>
 					</div>
@@ -99,12 +100,11 @@ if(isset($_POST['delete_link'])){
 					<div class="fpart2">
 						<h2><?=  $col['judul_doc']; ?></h2>
 						<iframe src="<?=  $col['link']; ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-						<form id="delete_video" class="input-group" method="post">
+						<form id="delete_video" class="input-group-link" method="post">
 						<input type="hidden" class="input-field" value="<?= $col['id_doc'];?>" name="id_doc" id="id_doc" >
+						<button type="submit" id="btnSubmit" class="submit-btn-co" name="delete_link">Delete Video </button>
 						<br>
-						<button type="submit" id="btnSubmit" class="submit-btn" name="delete_link">Delete Video </button>
-						<br>
-					</form>
+						</form>
 					</div>
 				</div>
 			</center>

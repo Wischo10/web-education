@@ -5,9 +5,10 @@ if( !isset($_SESSION["login"]) ) {
 	exit;
 }
 include '../php/functions.php';
+$users = query('SELECT * FROM users');
 $role = $_SESSION["role"] == 'pengajar';
 $id = $_SESSION['id_users'];
-$users = query('SELECT * FROM users WHERE id_users');
+
 
 ?>
 <!DOCTYPE html>
@@ -41,14 +42,18 @@ $users = query('SELECT * FROM users WHERE id_users');
 		<div class="totalcard">
 			<div class="card">
 				<center><img src="../asset/images/profile/pic.jpg"></center>
-				<center><div class="card-title">Surya pandrana</div>
+				<center><div class="card-title"><?php echo $users['nama']; ?></div>
 				<div id="detail">
 					<div>
 						<?php
-						echo $users['name'];
-						echo $users['username'];
-						echo $users['email'];
-						echo $users['role'];
+						if( isset($_SESSION["login"]) ) {
+							$users = query('SELECT * FROM users WHERE id_users');
+							
+							echo $users['username'];
+							echo $users['email'];
+							echo $users['role'];
+						}
+
 						?>
 					</div>
 				</div>

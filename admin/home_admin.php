@@ -4,17 +4,17 @@ if( !isset($_SESSION["login"]) ) {
 	header("Location: login.php");
 	exit;
 }
+$role = $_SESSION["role"] == 'admin';
 include '../php/functions.php';
 $course = query("SELECT * FROM course");
-
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
 	<link rel="shortcut icon" type="png" href="../asset/images/icon/clever.png">
 	<title>Courses on E-Clever</title>
-	<link rel="stylesheet" type="text/css" href="../subPengajar/pengajar.css">
+	<script src="https://unpkg.com/feather-icons"></script>
+	<link rel="stylesheet" type="text/css" href="adminstyle.css">
 	<script type="text/javascript" src="../js/script.js"></script>
 </head>
 <body>
@@ -26,16 +26,16 @@ $course = query("SELECT * FROM course");
 			<a href="#"><img src="../asset/images/icon/clever.png" style="width: 120px;"></a></div>
 			<div class="switch-tab" id="switch-tab" onclick="switchTAB()"><img src="../asset/images/icon/menu.svg"></div>
 			<ul id="list-switch">
-			<li><a href="home_teacher.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
-			<li><a href="course_teacher.php"><img src="../asset/images/icon/archive.svg" class="icon">Kursus</a></li>
-			<li><a href="upload.php"><img src="../asset/images/icon/upload.svg" class="icon">Upload</a></li>
-			<li><a href="profile_pengajar.php"><img src="../asset/images/icon/user.svg" class="icon">Profile</a></li>
-			<li><a href="../php/logout.php"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
+            <li><a href="home_admin.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
+            <li><a href="course_admin.php"><img src="../asset/images/icon/archive.svg" class="icon">Kursus</a></li>
+			<li><a href="users.php"><img src="../asset/images/icon/user.svg" class="icon">Daftar Pengguna</a></li>
+            <li><a href="profile_admin.php"><img src="../asset/images/icon/user.svg" class="icon">Data Diri</a></li>
+            <li><a href="../php/logout.php"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
 			</ul>
 		</div>
 	</header>
 
-<!-- Course -->
+<!-- MAIN Heading of Page -->
 <div class="diffSection" id="course_section">
 		<center><p style="font-size: 50px; padding-top: 100px; padding-bottom: 60px;">Kursus</p></center>
 		<div class="totalcard">
@@ -49,7 +49,7 @@ $course = query("SELECT * FROM course");
 				<div id="detail">
 					<p><?= $row["deskripsi"]; ?></p>
 					<div class="duty"></div>
-					<a href="login.html" target="_blank"><button class="btn-course">Join Course</button></a>
+					<a href="course_admin.php" target="_blank"><button class="btn-course">Join Course</button></a>
 				</div>
 				</center>
 		

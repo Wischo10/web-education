@@ -1,3 +1,14 @@
+<?php
+session_start();
+if( !isset($_SESSION["login"]) ) {
+	header("Location: login.php");
+	exit;
+}
+$role = $_SESSION["role"] == 'admin';
+include '../php/functions.php';
+$course = query("SELECT * FROM course WHERE id_course");
+$doc = query("SELECT * FROM dokumen WHERE id_doc");
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,29 +26,41 @@
         <a href="#"><img src="../asset/images/icon/clever.png" style="width: 120px;"></a></div>
         <div class="switch-tab" id="switch-tab" onclick="switchTAB()"><img src="../asset/images/icon/menu.svg"></div>
         <ul id="list-switch">
-            <li><a href="home.html"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
-            <li><a href="mycourse.html"><img src="../asset/images/icon/archive.svg" class="icon">Kursus</a></li>
+			<li><a href="home_admin.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
+            <li><a href="course_admin.php"><img src="../asset/images/icon/archive.svg" class="icon">Kursus</a></li>
 			<li><a href="users.php"><img src="../asset/images/icon/user.svg" class="icon">Daftar Pengguna</a></li>
-            <li><a href="profile.html"><img src="../asset/images/icon/user.svg" class="icon">Profile</a></li>
-            <li><a onclick="logout()"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
+            <li><a href="profile_admin.php"><img src="../asset/images/icon/user.svg" class="icon">Data Diri</a></li>
+            <li><a href="../php/logout.php"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
         </ul>
     </div>
 </header>
-	
+
+<!-- Courses Available -->
 <section class="pro">
-	<div class="diffSection" id="course_section">
-		<div class="totalcard">
-			<div class="card">
-				<center><img src="../asset/images/profile/pic.jpg"></center>
-				<center><div class="card-title">Surya pandrana</div>
-				<div id="detail">
-					<div class="duty"></div>
-					<a href=""><button class="btn-course"></button></a>
-				</div>
-				</center>
-			</div>
+		
+<?php $i = 1; ?>
+		<?php foreach($course as $row) :?>
+		<div class="title2" id="">
+			<span class="tag2"><?= $row['judul_course'];?></span>
 		</div>
-	 </div>
+		<?php foreach($doc as $col) :?>
+			<?php if  ($row['id_course']==$col['id_course']){?>
+			<br>
+			<center>
+				<div class="ccardbox2">
+					<div class="fpart2">
+						<h2><?=  $col['judul_doc']; ?></h2>
+						<iframe src="<?=  $col['link']; ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					</div>
+				</div>
+			</center>
+			<?php } ?>
+			<?php endforeach; ?>
+			<?php endforeach; ?>
+			<br><br>
+
+		<?php $i++; ?>
+
 </section>
 
 <!-- FOOTER -->

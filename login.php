@@ -46,7 +46,7 @@ if(isset($_POST["masuk"])){
 			elseif ($role == 'pelajar') {
 				header('Location: subPelajar/home.php');
 			} else {
-				header('Location: admin/home.php');
+				header('Location: admin/home_admin.php');
 			}
 			exit;
 		}

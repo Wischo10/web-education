@@ -1,9 +1,15 @@
 <?php
+session_start();
+if( !isset($_SESSION["login"]) ) {
+	header("Location: login.php");
+	exit;
+}
+$role = $_SESSION["role"] == 'admin';
 require '../php/functions.php';
 
 $id = $_GET["id"];
 
-if( delete($id) > 0){
+if( deleteUsers($id) > 0){
     echo "
     <script>
     alert('Daftar Berhasil!')

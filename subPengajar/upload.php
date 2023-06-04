@@ -5,8 +5,10 @@ if( !isset($_SESSION["login"]) ) {
 	exit;
 }
 include '../php/functions.php';
+$course = query("SELECT * FROM course");
 
 if(isset($_POST['upload'])){
+
 
 	if(InsertCourse($_POST)>0){
 		echo "
