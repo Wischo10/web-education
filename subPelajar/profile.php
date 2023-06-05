@@ -7,6 +7,17 @@ if( !isset($_SESSION["login"]) ) {
 include '../php/functions.php';
 $role = $_SESSION["role"];
 $course = query("SELECT * FROM course");
+$users = query("SELECT * FROM users");
+$username = $_SESSION['username'];
+$result = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
+if(mysqli_num_rows($result) == 1) {
+    $row = mysqli_fetch_assoc($result);
+
+    $role = $row['role'];
+    $nama = $row['nama'];
+    $email = $row['email'];
+
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,10 +49,14 @@ $course = query("SELECT * FROM course");
 		<div class="totalcard">
 			<div class="card">
 				<center><img src="../asset/images/profile/pic.jpg"></center>
-				<center><div class="card-title">Surya pandrana</div>
+				<center><div class="card-title"><?php echo $_SESSION['username'];?></div>
 				<div id="detail">
-					<div class="duty"></div>
-					<a href=""><button class="btn-course"></button></a>
+				<div class="duty">Nama : <?php echo $nama; ?></div>
+					<br>
+					<div class="duty">Email : <?php echo $email; ?></div>
+					<br>
+					<div class="duty">Role : <?php echo $role; ?></div>
+					<a href="updatePro.php"><button type="submit" class="btn-course">update profile</button></a>
 				</div>
 				</center>
 			</div>

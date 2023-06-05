@@ -1,7 +1,7 @@
 <?php
 session_start();
 if( !isset($_SESSION["login"]) ) {
-	header("Location: Users.php");
+	header("Location: login.php");
 	exit;
 }
 $role = $_SESSION["role"] == 'admin';
@@ -9,7 +9,7 @@ require '../php/functions.php';
 
 $id = $_GET["id"];
 
-if( deleteUsers($id) > 0){
+if( deleteCor($id) > 0){
     echo "
     <script>
     alert('Delete Berhasil!')

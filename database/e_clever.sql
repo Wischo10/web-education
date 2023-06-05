@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 04 Jun 2023 pada 20.09
+-- Waktu pembuatan: 03 Jun 2023 pada 21.12
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -31,7 +31,7 @@ CREATE TABLE `course` (
   `id_course` int(11) NOT NULL,
   `judul_course` varchar(255) NOT NULL,
   `deskripsi` varchar(255) NOT NULL,
-  `gambar` text NOT NULL
+  `gambar` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -39,8 +39,12 @@ CREATE TABLE `course` (
 --
 
 INSERT INTO `course` (`id_course`, `judul_course`, `deskripsi`, `gambar`) VALUES
-(8, 'Hypertext Markup Language (HTML)', 'HTML adalah kerangka struktural dari proses desain situs web. Dan proses desain website HTML menggunakan tag HTML yang sering digunakan dalam desain website antara lain div, p, h1, img, a, nav, ol, ul dan masih banyak lagi.', '647cce5090e35.png'),
-(9, 'Cascading Style Sheet (CSS)', 'Cascading Style Sheet merupakan bahasa presentasi digunakan untuk mengatur tampilan visual halaman web. Pengembang web untuk membuat halaman web yang tampak cantik dan menarik, mengontrol bagaimana elemen seperti teks, gambar, dan formulir ditampilkan.', '647ccebbb3596.png');
+(1, 'Hypertext Markup Language (HTML)', '“ HTML adalah kerangka struktural dari proses desain situs web. Dan proses desain website HTML menggunakan tag HTML yang sering digunakan dalam desain website antara lain div, p, h1, img, a, nav, ol, ul dan masih banyak lagi.“', 'thumb-1.png'),
+(2, 'Cascading Style Sheet (CSS)', 'Cascading Style Sheet merupakan bahasa presentasi digunakan untuk mengatur tampilan visual halaman web. CSS memungkinkan pengembang web untuk membuat halaman web yang tampak cantik dan menarik, mengontrol bagaimana elemen seperti teks, gambar, dan formuli', 'thumb-2.png'),
+(3, 'Javascript (JS)', 'JavaScript memungkinkan pengembang web untuk menambahkan interaksi, animasi, dan efek visual ke halaman web. JavaScript juga memungkinkan pengembang memvalidasi input formulir, membuat pop-up, dan menambahkan konten secara real-time tanpa memuat ulang hal', 'thumb-3.png'),
+(4, 'PHP: Hypertext Preprocessor', 'PHP merupakan singkatan dari PHP : Hypertext Preprocessor adalah salah satu Bahasa scripting open source yang banyak digunakan oleh Web Developer untuk pengembangan Web. PHP banyak digunakan untuk membuat banyak project seperti Grafik Antarmuka (GUI), Web', 'thumb-2.png'),
+(7, 'goggle', 'aaaaa', '647b8fc58b808.jpg'),
+(8, 'goggle', 'aaaaa', '647b90233cc81.jpg');
 
 -- --------------------------------------------------------
 
@@ -60,10 +64,18 @@ CREATE TABLE `dokumen` (
 --
 
 INSERT INTO `dokumen` (`id_doc`, `id_course`, `judul_doc`, `link`) VALUES
-(12, 8, 'pertemuan 1', 'https://www.youtube.com/embed/NBZ9Ro6UKV8'),
-(13, 8, 'pertemuan 2', 'https://www.youtube.com/embed/1NicaVOCXHA'),
-(14, 9, 'pertemuan 1', 'https://www.youtube.com/embed/CleFk3BZB3g'),
-(15, 9, 'pertemuan 2', 'https://www.youtube.com/embed/8lXDi2Mxp9c');
+(1, 1, 'Materi 1', 'https://youtube.com/embed/NBZ9Ro6UKV8');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `id` int(11) NOT NULL,
+  `id_users` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -112,6 +124,12 @@ ALTER TABLE `dokumen`
   ADD KEY `id_course` (`id_course`);
 
 --
+-- Indeks untuk tabel `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
@@ -125,13 +143,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `course`
 --
 ALTER TABLE `course`
-  MODIFY `id_course` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_course` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `dokumen`
 --
 ALTER TABLE `dokumen`
-  MODIFY `id_doc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_doc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `sessions`
+--
+ALTER TABLE `sessions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`

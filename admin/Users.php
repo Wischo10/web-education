@@ -5,9 +5,10 @@ if( !isset($_SESSION["login"]) ) {
 	exit;
 }
 $role = $_SESSION["role"] == 'admin';
-require '../php/functions.php';
+$id_user = $_SESSION['id_users'];
+$_SESSION['id_users'];
+include '../php/functions.php';
 $users = query("SELECT * FROM users");
-$course = query("SELECT * FROM course WHERE id_course");
 if(isset($_POST["submit"])){
 
 	if(InsertUsers($_POST)>0){
@@ -46,7 +47,7 @@ if(isset($_POST["submit"])){
         <ul id="list-switch">
 		<li><a href="home_admin.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
             <li><a href="course_admin.php"><img src="../asset/images/icon/archive.svg" class="icon">Kursus</a></li>
-			<li><a href="users.php"><img src="../asset/images/icon/user.svg" class="icon">Daftar Pengguna</a></li>
+			<li><a href="Users.php"><img src="../asset/images/icon/user.svg" class="icon">Daftar Pengguna</a></li>
             <li><a href="list_course.php"><img src="../asset/images/icon/book.svg" class="icon">Daftar Kursus</a></li>
             <li><a href="profile_admin.php"><img src="../asset/images/icon/user.svg" class="icon">Data Diri</a></li>
             <li><a href="../php/logout.php"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
@@ -77,7 +78,6 @@ if(isset($_POST["submit"])){
 				<td><?= $row["email"]; ?></td>
 				<td><?= $row["role"]; ?></td>
 				<td>
-					<a href="update.php?id=<?= $row["id_users"]; ?>">ubah</a><br>
 					<a href="delete.php?id=<?= $row["id_users"]; ?>" onclick="return confirm('yakin?')">hapus</a>
 				</td>
 			</tr>

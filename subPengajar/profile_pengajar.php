@@ -1,13 +1,23 @@
 <?php
 session_start();
-if( !isset($_SESSION["login"]) ) {
-	header("Location: login.php");
-	exit;
-}
 include '../php/functions.php';
-$users = query('SELECT * FROM users');
+$id_users = $_SESSION['id_users'];
+$username = $_SESSION['username'];
 $role = $_SESSION["role"] == 'pengajar';
-$id = $_SESSION['id_users'];
+$id_user = $_SESSION['id_users'];
+$name = $_SESSION['nama'];
+
+$users = query("SELECT * FROM users");
+$username = $_SESSION['username'];
+$result = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
+if(mysqli_num_rows($result) == 1) {
+    $row = mysqli_fetch_assoc($result);
+
+    $role = $row['role'];
+    $nama = $row['nama'];
+    $email = $row['email'];
+
+}
 
 
 ?>
@@ -42,26 +52,14 @@ $id = $_SESSION['id_users'];
 		<div class="totalcard">
 			<div class="card">
 				<center><img src="../asset/images/profile/pic.jpg"></center>
-				<center><div class="card-title"></div>
+				<center><div class="card-title"><?php echo $_SESSION['username'];?></div>
 				<div id="detail">
-					<div>
-						<?php
-						if( isset($_SESSION["login"]) && isset($_SESSION["id_users"]) ) {
-
-						
-						$query = "SELECT * FROM users WHERE id_users = '".$_SESSION['id_users']."'";
-						$result = mysqli_query($conn, $query);
-
-						  $row = mysqli_fetch_assoc($result);
-				
-						  echo "<div class='info'><strong>:</strong><p> " . $row['nama'] . " </p></div>";
-						  echo "<div class='info'><strong>Student Name:</strong> <span>" . $row['username'] . "</span></div>";
-						  echo "<div class='info'><strong>Course:</strong> <span>" . $row['email'] . "</span></div>";
-						  echo "<div class='info'><strong>Year Level:</strong> <span>" . $row['role'] . "</span></div>";
-						}
-
-						?>
-					</div>
+				<div class="duty">Nama : <?php echo $nama; ?></div>
+					<br>
+					<div class="duty">Email : <?php echo $email; ?></div>
+					<br>
+					<div class="duty">Role : <?php echo $role; ?></div>
+					<a href="update_Profile_pengajar.php"><button type="submit" class="btn-course">update profile</button></a>
 				</div>
 				</center>
 			</div>

@@ -31,15 +31,28 @@ if(isset($_POST["masuk"])){
 	$password = $_POST["password"];
 
 	$result = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
-	
+	$_SESSION['id_users'] = $row['id_user'];
+    $_SESSION['username'] = $username;
 
 	if(mysqli_num_rows($result) === 1){
 		$row = mysqli_fetch_assoc($result);
-		$_SESSION['id_users'] = $row['id_user'];
+
 		$role = $row['role'];
 		if ($password === $row['password']) {
 			$_SESSION['login'] = true;
 			$_SESSION['role'] = $role;
+			$_SESSION['nama'] = $name;
+			$_SESSION['email'] = $email;
+
+			// $token = bin2hex(random_bytes(16));
+			// $stmt = $connection->prepare('INSERT INTO sessions (user_id, token) VALUES (?, ?)');
+			// $stmt->bind_param('ss', $user['id_user'], $token);
+			// $stmt->execute();
+			// $stmt->close();
+	
+			// $_SESSION['user_id'] = $user['id_user'];
+			// $_SESSION['token'] = $token;
+
 			if ($role == 'pengajar') {
 				header('Location: subPengajar/home_teacher.php');
 			}
@@ -81,7 +94,7 @@ if(isset($_POST["masuk"])){
 			</div>
 
 			<?php if(isset($error)) : ?>
-				<p style="color: red; font-style: italic; margin-left:20%; padding-bottom:10%;">username atau password salah</p>
+				<p style="color: red; font-style: italic; margin-left:20%; padding-bottom:20%;">username atau password salah</p>
 			<?php endif; ?>
 			
 			<!-- Login Form -->

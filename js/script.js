@@ -115,19 +115,3 @@
 // function redirectToLogin() {
 //   window.location.href = '../login.html';
 // }
-
-function extractVideoId(url) {
-  var videoId = "";
-  if (url.indexOf("youtube.com") !== -1) {
-    videoId = url.split("v=")[1];
-  } else if (url.indexOf("youtu.be") !== -1) {
-    videoId = url.split("youtu.be/")[1];
-  } else if (url.indexOf("embed") !== -1) {
-    videoId = url.split("embed/")[1];
-  }
-  return videoId;
-}
-// Function to start playing the video
-function onPlayerReady(event) {
-  event.target.playVideo();
-}

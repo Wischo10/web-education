@@ -1,11 +1,26 @@
 <?php
 session_start();
+include '../php/functions.php';
 if( !isset($_SESSION["login"]) ) {
 	header("Location: login.php");
 	exit;
 }
 $role = $_SESSION["role"] == 'admin';
-include '../php/functions.php';
+$id_user = $_SESSION['id_users'];
+$name = $_SESSION['nama'];
+
+$users = query("SELECT * FROM users");
+$username = $_SESSION['username'];
+$result = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
+if(mysqli_num_rows($result) == 1) {
+    $row = mysqli_fetch_assoc($result);
+
+    $role = $row['role'];
+    $nama = $row['nama'];
+    $email = $row['email'];
+
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,8 +40,8 @@ include '../php/functions.php';
         <div class="switch-tab" id="switch-tab" onclick="switchTAB()"><img src="../asset/images/icon/menu.svg"></div>
         <ul id="list-switch">
 		<li><a href="home_admin.php"><img src="../asset/images/icon/home.svg" class="icon">Beranda</a></li>
-            <li><a href="course_admin.php"><img src="../asset/images/icon/archive.svg" class="icon">Kursus</a></li>
-			<li><a href="users.php"><img src="../asset/images/icon/user.svg" class="icon">Daftar Pengguna</a></li>
+		<li><a href="course_admin.php"><img src="../asset/images/icon/archive.svg" class="icon">Kursus</a></li>
+			<li><a href="Users.php"><img src="../asset/images/icon/user.svg" class="icon">Daftar Pengguna</a></li>
             <li><a href="list_course.php"><img src="../asset/images/icon/book.svg" class="icon">Daftar Kursus</a></li>
             <li><a href="profile_admin.php"><img src="../asset/images/icon/user.svg" class="icon">Data Diri</a></li>
             <li><a href="../php/logout.php"><img src="../asset/images/icon/power.svg" alt="">Keluar</a></li>
@@ -39,10 +54,14 @@ include '../php/functions.php';
 		<div class="totalcard">
 			<div class="card">
 				<center><img src="../asset/images/profile/pic.jpg"></center>
-				<center><div class="card-title">Surya pandrana</div>
+				<center><div class="card-title"><?php echo $_SESSION['username'];?></div>
 				<div id="detail">
-					<div class="duty"></div>
-					<a href=""><button class="btn-course"></button></a>
+				<div class="duty">Nama : <?php echo $nama; ?></div>
+					<br>
+					<div class="duty">Email : <?php echo $email; ?></div>
+					<br>
+					<div class="duty">Role : <?php echo $role; ?></div>
+					<a href="update.php"><button type="submit" class="btn-course">update profile</button></a>
 				</div>
 				</center>
 			</div>

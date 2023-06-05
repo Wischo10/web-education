@@ -35,7 +35,7 @@ function InsertUsers($data) {
 
 function deleteUsers($id){
     global $conn;
-    mysqli_query($conn, "DELETE FROM users WHERE id_users = $id");
+    mysqli_query($conn, "DELETE FROM users WHERE id_users = '$id'");
     return mysqli_affected_rows($conn);
 }
 
@@ -55,6 +55,13 @@ function InsertCourse($data) {
     $query = "INSERT INTO course VALUES
                 ('','$judul', '$deskrip', '$gambar') ";
     
+    mysqli_query($conn, $query);
+    return mysqli_affected_rows($conn);
+}
+
+function deleteCor($id){
+    global $conn;
+    $query = "DELETE FROM course WHERE id_course = '$id'";
     mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
 }

@@ -4,6 +4,7 @@ if( !isset($_SESSION["login"]) ) {
 	header("Location: login.php");
 	exit;
 }
+$role = $_SESSION["role"] == 'pengajar';
 include '../php/functions.php';
 $course = query("SELECT * FROM course");
 
